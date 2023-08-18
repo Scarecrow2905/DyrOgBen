@@ -4,15 +4,15 @@ using DyrOgBen;
 
 Console.WriteLine("Dyr og ben.");
 
+GameManager gameManager = new GameManager();
 
-Animal animal = new Animal(" ", 0);
-
-
-animal.addAnimals();
-//animal.ShowList();
-animal.getRandomAnimal();
+gameManager.StartGame();
+// Animal animal = new Animal(" ", 0);
 
 
-Console.ReadKey();
+// animal.addAnimals();
+// animal.ShowList();
+// animal.getRandomAnimal();
+
 
 

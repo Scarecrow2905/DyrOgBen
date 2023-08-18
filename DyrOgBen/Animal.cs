@@ -13,37 +13,24 @@ public class Animal
         this.numberOfLegs = numberOfLegs;
     }
 
-    public void Add(Animal animal)
-    {
-        animals.Add(animal);
-    }
+    // public void Add(Animal animal)
+    // {
+    //     animals.Add(animal);
+    // }
+    //
+    // public void addAnimals()
+    // {
+    //     animals.Add(new Animal("Donkey", 4));
+    //     animals.Add(new Animal("Hawk", 2));
+    //     animals.Add(new Animal("Spider", 8));
+    //
+    // }
 
-    public void addAnimals()
-    {
-        animals.Add(new Animal("Donkey", 4));
-        animals.Add(new Animal("Hawk", 2));
-        animals.Add(new Animal("Spider", 8));
 
-    }
 
-    public void ShowList()
-    {
-        foreach (var animal in animals)
-        {
-            Console.WriteLine("Name: " + animal.name);
-            Console.WriteLine("Number of legs: " + animal.numberOfLegs);
-            Console.WriteLine("");
-        }
-    }
+    // Needs fixing: currently not showing correct output
+    // Fixed: Was only showing the index instead of storing animals[index] into a variable.
 
-    public void getRandomAnimal()
-    {
-        var random = new Random();
-        int index = random.Next(animals.Count);
-        Console.WriteLine("Random animal: " + index);
-        Console.WriteLine();
-
-    }
     
     
     
