@@ -2,15 +2,17 @@ namespace DyrOgBen;
 
 public class Animal
 {
-    public string name { get; set; }
-    public int numberOfLegs { get; set; }
+    public string name { get; }
+    public int numberOfLegs { get; }
+    public string hint { get; }
 
-    private List<Animal> animals = new List<Animal>();
+    private List<Animal> animals;
 
-    public Animal(string name, int numberOfLegs)
+    public Animal(string name, int numberOfLegs, string hint)
     {
         this.name = name;
         this.numberOfLegs = numberOfLegs;
+        this.hint = hint;
     }
 
     // public void Add(Animal animal)

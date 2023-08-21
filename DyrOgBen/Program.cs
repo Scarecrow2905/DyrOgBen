@@ -7,12 +7,10 @@ Console.WriteLine("Dyr og ben.");
 GameManager gameManager = new GameManager();
 
 gameManager.StartGame();
-// Animal animal = new Animal(" ", 0);
 
 
-// animal.addAnimals();
-// animal.ShowList();
-// animal.getRandomAnimal();
-
-
-
+// TODO 
+// Add hints
+// Add point system
+// Add profiles
+// 
