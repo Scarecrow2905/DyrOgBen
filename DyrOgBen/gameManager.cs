@@ -25,6 +25,7 @@ public class GameManager
         
         _currentAnimal = GetRandomAnimal();
         _guess = Guess();
+        //_userAnswer = TryAgain();
     }
     
     // A simple method to show the whole list if needed
@@ -140,7 +141,7 @@ public class GameManager
             {
                 Console.WriteLine("Correct! The animal was: " + _currentAnimal.name);
                 // TryAgain method here?
-                //UserAnswer tryAgainAnswer = TryAgain();
+                // UserAnswer tryAgainAnswer = TryAgain();
             }
             else
             {
