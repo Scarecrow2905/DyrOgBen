@@ -2,29 +2,35 @@ namespace DyrOgBen;
 
 public class GameManager
 {
-    private List<Animal> animals;
-    private Animal currentAnimal;
-    private int guess;
-    private bool gameActive;
+    private List<Animal> _animals;
+    private Animal _currentAnimal;
+    private int _guess;
+    private bool _gameActive;
+
+    private enum UserAnswer
+    {
+        Yes,
+        No
+    };
 
     public GameManager()
     {
-        animals = new List<Animal>();
+        _animals = new List<Animal>();
         
-        animals.Add(new Animal("Donkey", 4, "Commonly used for carrying heavy loads. "));
-        animals.Add(new Animal("Hawk", 2, "A bird of prey knows for its keen eyesight. "));
-        animals.Add(new Animal("Spider", 8, "Spins something to catch it's prey"));
-        animals.Add(new Animal("Centipede", 10000, "Has many legs, but not as the name suggests"));
-        animals.Add(new Animal("Ant", 6, "Known for its strong work etchic and teamwork"));
+        _animals.Add(new Animal("Donkey", 4, "Commonly used for carrying heavy loads. "));
+        _animals.Add(new Animal("Hawk", 2, "A bird of prey knows for its keen eyesight. "));
+        _animals.Add(new Animal("Spider", 8, "Spins something to catch it's prey"));
+        _animals.Add(new Animal("Centipede", 10000, "Has many legs, but not as the name suggests"));
+        _animals.Add(new Animal("Ant", 6, "Known for its strong work etchic and teamwork"));
         
-        currentAnimal = GetRandomAnimal();
-        guess = Guess();
+        _currentAnimal = GetRandomAnimal();
+        _guess = Guess();
     }
     
     // A simple method to show the whole list if needed
     public void ShowList()
     {
-        foreach (var animal in animals)
+        foreach (var animal in _animals)
         {
             Console.WriteLine("Name: " + animal.name);
             Console.WriteLine("Number of legs: " + animal.numberOfLegs);
@@ -36,9 +42,9 @@ public class GameManager
     public Animal GetRandomAnimal()
     {
         var random = new Random();
-        int index = random.Next(animals.Count);
+        int index = random.Next(_animals.Count);
 
-        Animal randomAnimal = animals[index];
+        Animal randomAnimal = _animals[index];
         
         // Console.WriteLine("Random animal: " + randomAnimal.name);
         // Console.WriteLine("Number of legs: " + randomAnimal.numberOfLegs);
@@ -49,8 +55,8 @@ public class GameManager
     // A simple method used to replace all letters in the name for " * " 
     public string BlurAnimalName()
     {
-        currentAnimal = GetRandomAnimal();
-        string nameToBlur = currentAnimal.name;
+        _currentAnimal = GetRandomAnimal();
+        string nameToBlur = _currentAnimal.name;
         string blurredName = "";
         
         foreach (char c in nameToBlur)
@@ -91,47 +97,59 @@ public class GameManager
     // Used to check if the guess corresponds to the current animal that was randomly retrieved
     public bool CheckIfCorrect(int guess)
     {
-
-        if (guess == currentAnimal.numberOfLegs)
+        if (guess == _currentAnimal.numberOfLegs)
         {
-            // Console.WriteLine("Correct!");
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryAgain()
+    {
+        Console.WriteLine("Try again? Please write: Yes or No");
+        string answer = Console.ReadLine().ToLower();
+        
+        if (answer == UserAnswer.Yes.ToString().ToLower())
+        {
             return true;
         }
 
-        // Console.WriteLine("Wrong, try again.");
+        if (answer == UserAnswer.No.ToString().ToLower())
+        {
+            return false;
+        }
+
+        Console.WriteLine("Incorrect input");
         return false;
     }
     // Bigger method where i pack the game logic and use the other methods
     public void StartGame()
     {
-        gameActive = true;
+        Console.WriteLine("Guess the number of legs: ");
+        _gameActive = true;
         
-        Console.WriteLine(BlurAnimalName());
-        Console.WriteLine(currentAnimal.hint);
-
-        while (gameActive)
+        while (_gameActive)
         {
-            //Console.Clear();
-            //Guess();
+            Console.WriteLine(BlurAnimalName());
+            Console.WriteLine(_currentAnimal.hint);
+            
             int guess = Guess();
             bool isCorrect = CheckIfCorrect(guess);
 
             if (isCorrect)
             {
-                Console.WriteLine("Correct! The animal was: " + currentAnimal.name);
-                gameActive = false;
+                Console.WriteLine("Correct! The animal was: " + _currentAnimal.name);
+                // TryAgain method here?
+                //UserAnswer tryAgainAnswer = TryAgain();
             }
             else
             {
                 Console.WriteLine("Wrong guess, please try again.");
-                gameActive = true;
+                _gameActive = true;
             }
         }
 
         Console.WriteLine("Game over, closing program..");
-        gameActive = false;
-
-        // Method here with while that keeps the game running, a bool method for example
-        
+        _gameActive = false;
     }
 }

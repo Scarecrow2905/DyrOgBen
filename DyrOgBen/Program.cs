@@ -2,15 +2,15 @@
 
 using DyrOgBen;
 
-Console.WriteLine("Dyr og ben.");
-Console.WriteLine("Guess the number of legs: ");
 GameManager gameManager = new GameManager();
+Console.WriteLine("Dyr og ben.");
+
 
 gameManager.StartGame();
 
 
 // TODO 
-// Add hints
-// Add point system
-// Add profiles
-// 
+// Add hints (✓) 
+// Add Try Again ( )
+// Add point system ( )
+// Add profiles ( )
