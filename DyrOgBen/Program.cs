@@ -3,7 +3,7 @@
 using DyrOgBen;
 
 Console.WriteLine("Dyr og ben.");
-
+Console.WriteLine("Guess the number of legs: ");
 GameManager gameManager = new GameManager();
 
 gameManager.StartGame();

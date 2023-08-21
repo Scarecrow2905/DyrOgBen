@@ -106,7 +106,6 @@ public class GameManager
     {
         gameActive = true;
         
-        Console.WriteLine("Guess the number of legs: ");
         Console.WriteLine(BlurAnimalName());
         Console.WriteLine(currentAnimal.hint);
 
