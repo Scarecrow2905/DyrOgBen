@@ -15,3 +15,6 @@ gameManager.StartGame();
 // Add Try Again (✓)
 // Add point system ( )
 // Add profiles ( )
+
+// Add a class that contains the programs theme/category, difficulty settings
+// Add classes that inherits from this one 

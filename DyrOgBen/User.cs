@@ -11,7 +11,6 @@ public class User
         this.Name = name;
         this.Password = password;
         this.Point = point;
-
     }
 
     public string GetUserName()
@@ -28,6 +27,19 @@ public class User
     {
         return Password;
     }
-    //public void SetUserPassword(string newUserPassw)
-    
+
+    public void SetUserPassword(string newUserPassword)
+    {
+        Password = newUserPassword;
+    }
+
+    public int GetUserPoint()
+    {
+        return Point;
+    }
+
+    public void SetUserPoint(int newUserPoint)
+    {
+        Point = newUserPoint;
+    }
 }

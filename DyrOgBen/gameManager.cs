@@ -15,6 +15,7 @@ public class GameManager
 
     public GameManager()
     {
+        
         _animals = new List<Animal>();
         
         _animals.Add(new Animal("Donkey", 4, "Commonly used for carrying heavy loads. "));
@@ -62,10 +63,9 @@ public class GameManager
     public string BlurAnimalName()
     {
         _currentAnimal = GetRandomAnimal();
-        string nameToBlur = _currentAnimal.name;
         string blurredName = "";
         
-        foreach (char c in nameToBlur)
+        foreach (char c in _currentAnimal.name)
         {
             if (char.IsLetter(c))
             {
@@ -156,11 +156,10 @@ public class GameManager
                     _currentAnimal = GetRandomAnimal();
                     _guess = Guess();
                 }
-                else
+                if (userAnswer == false)
                 {
                     Console.WriteLine("Closing program..");
                     _gameActive = false;
-                    //Environment.Exit(0);
                 }
             }
             else
