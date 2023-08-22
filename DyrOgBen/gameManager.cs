@@ -22,6 +22,11 @@ public class GameManager
         _animals.Add(new Animal("Spider", 8, "Spins something to catch it's prey"));
         _animals.Add(new Animal("Centipede", 10000, "Has many legs, but not as the name suggests"));
         _animals.Add(new Animal("Ant", 6, "Known for its strong work etchic and teamwork"));
+        _animals.Add(new Animal("Elephant", 4, "Known for its large size and long trunk."));
+        _animals.Add(new Animal("Giraffe", 4, "Has a long neck and spots on its body."));
+        _animals.Add(new Animal("Dolphin", 0, "A marine mammal known for its intelligence and playful behavior."));
+        _animals.Add(new Animal("Lion", 4, "A big cat known as the 'king of the jungle.'"));
+        _animals.Add(new Animal("Crocodile", 4, "A reptile with a long snout and sharp teeth."));
         
         _currentAnimal = GetRandomAnimal();
         _guess = Guess();
@@ -87,7 +92,7 @@ public class GameManager
         }
         else
         {
-            Console.WriteLine("Invalid input, it must be a number. Please try again.");
+            Console.WriteLine("How many legs do you think this animal has? ");
             // This might need another solution, like a throw-exception. 
             return -1;
         }
@@ -108,7 +113,7 @@ public class GameManager
     public bool TryAgain()
     {
         Console.WriteLine("Try again? Please write: Yes or No");
-        string answer = Console.ReadLine().ToLower();
+        string? answer = Console.ReadLine()?.ToLower();
         
         if (answer == UserAnswer.Yes.ToString().ToLower())
         {
@@ -140,8 +145,23 @@ public class GameManager
             if (isCorrect)
             {
                 Console.WriteLine("Correct! The animal was: " + _currentAnimal.name);
-                // TryAgain method here?
-                // UserAnswer tryAgainAnswer = TryAgain();
+                bool userAnswer = TryAgain();
+                if (userAnswer)
+                {
+                    Console.WriteLine("Starting a new game..");
+                    // StartGame();
+                    // To save memory it's better to reset the
+                    // state these objects to their initial values instead of creating a new instance
+                    // of gameManager.
+                    _currentAnimal = GetRandomAnimal();
+                    _guess = Guess();
+                }
+                else
+                {
+                    Console.WriteLine("Closing program..");
+                    _gameActive = false;
+                    //Environment.Exit(0);
+                }
             }
             else
             {
@@ -149,8 +169,5 @@ public class GameManager
                 _gameActive = true;
             }
         }
-
-        Console.WriteLine("Game over, closing program..");
-        _gameActive = false;
     }
 }
