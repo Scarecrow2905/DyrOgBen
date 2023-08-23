@@ -8,9 +8,9 @@ public class User
 
     public User(string name, string password, int point)
     {
-        this.Name = name;
-        this.Password = password;
-        this.Point = point;
+        Name = name;
+        Password = password;
+        Point = point;
     }
 
     public string GetUserName()

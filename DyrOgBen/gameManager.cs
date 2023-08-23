@@ -4,13 +4,16 @@ public class GameManager
 {
     private List<Animal> _animals;
     private Animal _currentAnimal;
+    private UserManager _userManager;
     private int _guess;
     private bool _gameActive;
+    private readonly User? _currentUser;
 
     private enum UserAnswer
     {
         Yes,
-        No
+        No,
+        Back
     };
 
     public GameManager()
@@ -28,7 +31,9 @@ public class GameManager
         _animals.Add(new Animal("Dolphin", 0, "A marine mammal known for its intelligence and playful behavior."));
         _animals.Add(new Animal("Lion", 4, "A big cat known as the 'king of the jungle.'"));
         _animals.Add(new Animal("Crocodile", 4, "A reptile with a long snout and sharp teeth."));
-        
+
+        // _currentUser = _userManager.LogIn();
+        _userManager = new UserManager();
         _currentAnimal = GetRandomAnimal();
         _guess = Guess();
         //_userAnswer = TryAgain();
@@ -125,13 +130,44 @@ public class GameManager
             return false;
         }
 
+        if (answer == UserAnswer.Back.ToString().ToLower())
+        {
+            MainMenu();
+        }
+
         Console.WriteLine("Incorrect input");
         return false;
+    }
+    
+    public void MainMenu()
+    {
+        Console.WriteLine("Dyr og ben. ");
+        
+        string? option = Console.ReadLine();
+        
+            switch (option)
+            { 
+                case "1":
+                    Console.WriteLine("Start game ");
+                    StartGame();
+                break;
+                case "2":
+                    Console.WriteLine("Log in ");
+                    _userManager.LogIn();
+                break;
+                case "3":
+                    Console.WriteLine("Exit Program");
+                    Environment.Exit(0);
+                break;
+                default:
+                    Console.WriteLine("Thorbjørn er big daddy"); 
+                break;
+            }
+        
     }
     // Bigger method where i pack the game logic and use the other methods
     public void StartGame()
     {
-        Console.WriteLine("Guess the number of legs: ");
         _gameActive = true;
         
         while (_gameActive)
@@ -149,10 +185,7 @@ public class GameManager
                 if (userAnswer)
                 {
                     Console.WriteLine("Starting a new game..");
-                    // StartGame();
-                    // To save memory it's better to reset the
-                    // state these objects to their initial values instead of creating a new instance
-                    // of gameManager.
+
                     _currentAnimal = GetRandomAnimal();
                     _guess = Guess();
                 }
@@ -169,4 +202,6 @@ public class GameManager
             }
         }
     }
+    
+    
 }

@@ -6,9 +6,8 @@ public class UserManager
     private User? _currentUser;
     private bool _loggedIn;
 
-    public UserManager(bool loggedIn)
+    public UserManager()
     {
-        _loggedIn = loggedIn;
         _users = new List<User?>();
         _users.Add(new User("Tommy", "12345", 0));
     }
@@ -20,7 +19,7 @@ public class UserManager
 
     }
     
-    public void LogIn()
+    public User? LogIn()
     {
         Console.WriteLine("Enter username: ");
         string username = Console.ReadLine();
@@ -28,6 +27,31 @@ public class UserManager
         Console.WriteLine("Enter password: ");
         string password = Console.ReadLine();
 
-        _currentUser = FindUser(username, password);
+        if (username != null)
+            if (password != null)
+                _currentUser = FindUser(username, password);
+
+        if (_currentUser != null) // This means ! = null, just as a future reference
+        {
+            _loggedIn = true;
+            Console.WriteLine("Logged in as: " + _currentUser.GetUserName());
+            Console.WriteLine("Points: " + _currentUser.GetUserPoint());
+            return _currentUser;
+        }
+        
+        else
+        {
+            _loggedIn = false;
+            Console.WriteLine("Didn't find a user that matched your criteria, please try again. ");
+            return null;
+        }
+
+    }
+
+    public void LogOut()
+    {
+        _loggedIn = false;
+        Console.WriteLine("Logged out as " + _currentUser?.GetUserName());
+        _currentUser = null; // Clear user reference, might need to look more into this later
     }
 }
