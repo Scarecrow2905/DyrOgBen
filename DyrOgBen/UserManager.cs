@@ -27,9 +27,7 @@ public class UserManager
         Console.WriteLine("Enter password: ");
         string password = Console.ReadLine();
 
-        if (username != null)
-            if (password != null)
-                _currentUser = FindUser(username, password);
+        _currentUser = FindUser(username, password);
 
         if (_currentUser != null) // This means ! = null, just as a future reference
         {
@@ -39,13 +37,10 @@ public class UserManager
             return _currentUser;
         }
         
-        else
-        {
-            _loggedIn = false;
-            Console.WriteLine("Didn't find a user that matched your criteria, please try again. ");
-            return null;
-        }
-
+        _loggedIn = false;
+        Console.WriteLine("Didn't find a user that matched your criteria, please try again. ");
+        return null;
+        
     }
 
     public void LogOut()

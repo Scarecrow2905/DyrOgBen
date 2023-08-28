@@ -16,7 +16,7 @@ gameManager.MainMenu();
 // Add profiles (✓)
 // Add point system () * on hold
 
-// Fix case 1 inside MainMenu():
+// Fix case 1 inside MainMenu(✓) * Should be fixed now;
 // Make Login() return _loggedIn or _notLoggedIn?
 // Make it possible to start game without logging in
 // Make us of the logout method

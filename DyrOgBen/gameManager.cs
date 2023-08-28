@@ -141,26 +141,25 @@ public class GameManager
     
     public void MainMenu()
     {
-        Console.WriteLine("Dyr og ben. ");
+        Console.WriteLine("1. Start game");
+        Console.WriteLine("2. Log in");
+        Console.WriteLine("3. Exit");
         
         string? option = Console.ReadLine();
         
             switch (option)
             { 
                 case "1":
-                    Console.WriteLine("Start game ");
                     StartGame();
                 break;
                 case "2":
-                    Console.WriteLine("Log in ");
                     _userManager.LogIn();
-                break;
+                    break;
                 case "3":
-                    Console.WriteLine("Exit Program");
                     Environment.Exit(0);
                 break;
                 default:
-                    Console.WriteLine("Thorbjørn er big daddy"); 
+                    Console.WriteLine("Invalid option, please choose a number"); 
                 break;
             }
         
