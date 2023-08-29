@@ -41,10 +41,11 @@ public class UserManager
         return null;
     }
 
-    public void LogOut()
+    public User? LogOut()
     {
         _loggedIn = false;
         Console.WriteLine("Logged out as " + _currentUser?.GetUserName());
         _currentUser = null; // Clear user reference, might need to look more into this later
+        return _currentUser;
     }
 }

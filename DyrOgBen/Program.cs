@@ -2,7 +2,6 @@
 
 using DyrOgBen;
 
-// Program.cs
 GameManager gameManager = new GameManager();
 
 gameManager.MainMenu();
@@ -13,13 +12,14 @@ gameManager.MainMenu();
 // Add hints (✓) 
 // Add Try Again (✓)
 // Add profiles (✓)
-// Add point system () * on hold
+// Add point system (✓)
 
 // Fix case 1 inside MainMenu(✓) * Should be fixed now;
 // Make it possible to start game without logging in (✓)
 // Make use of the logout method (✓)
-// Fix wrong answer
-// Fix Back CW
+// Fix wrong answer (✓)
+// Fix Back CW (✓)
+// Fix LogIn and LogOut (!!!)
 
 // Add a class that contains the programs theme/category, difficulty settings
 // Add classes that inherits from this one 

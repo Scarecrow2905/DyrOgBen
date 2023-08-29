@@ -44,7 +44,7 @@ public class GameManager
         {
             Console.WriteLine("Name: " + animal.name);
             Console.WriteLine("Number of legs: " + animal.numberOfLegs);
-            Console.WriteLine("");
+            Console.WriteLine(" ");
         }
     }
     
@@ -115,7 +115,6 @@ public class GameManager
     public bool TryAgain()
     {
         Console.WriteLine("Try again? Please write: Yes or No.");
-        Console.WriteLine("Type Back, to go back to main menu");
         string? answer = Console.ReadLine()?.ToLower();
         
         if (answer == UserAnswer.Yes.ToString().ToLower())
@@ -128,8 +127,7 @@ public class GameManager
             MainMenu();
             return false;
         }
-
-
+        
         Console.WriteLine("Incorrect input");
         return false;
     }
@@ -137,7 +135,16 @@ public class GameManager
     public void MainMenu()
     {
         Console.WriteLine("1. Start game");
-        Console.WriteLine("2. Log in");
+        
+        if (_currentUser != null)
+        {
+            Console.WriteLine("2. Log out");
+        }
+        else
+        {
+            Console.WriteLine("2. Log in");
+        }
+        
         Console.WriteLine("3. Exit");
         
         string? option = Console.ReadLine();
@@ -148,6 +155,7 @@ public class GameManager
                     StartGame();
                 break;
                 case "2":
+                    if (_currentUser != null) _currentUser = _userManager.LogOut();
                     _currentUser = _userManager.LogIn();
                     MainMenu();
                     break;
