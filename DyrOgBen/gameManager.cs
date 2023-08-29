@@ -7,13 +7,12 @@ public class GameManager
     private UserManager _userManager;
     private int _guess;
     private bool _gameActive;
-    private readonly User? _currentUser;
+    private User? _currentUser;
 
     private enum UserAnswer
     {
         Yes,
-        No,
-        Back
+        No
     };
 
     public GameManager()
@@ -24,7 +23,7 @@ public class GameManager
         _animals.Add(new Animal("Donkey", 4, "Commonly used for carrying heavy loads. "));
         _animals.Add(new Animal("Hawk", 2, "A bird of prey knows for its keen eyesight. "));
         _animals.Add(new Animal("Spider", 8, "Spins something to catch it's prey"));
-        _animals.Add(new Animal("Centipede", 10000, "Has many legs, but not as the name suggests"));
+        _animals.Add(new Animal("Centipede", 1000, "Has many legs, but not as the name suggests"));
         _animals.Add(new Animal("Ant", 6, "Known for its strong work etchic and teamwork"));
         _animals.Add(new Animal("Elephant", 4, "Known for its large size and long trunk."));
         _animals.Add(new Animal("Giraffe", 4, "Has a long neck and spots on its body."));
@@ -32,11 +31,10 @@ public class GameManager
         _animals.Add(new Animal("Lion", 4, "A big cat known as the 'king of the jungle.'"));
         _animals.Add(new Animal("Crocodile", 4, "A reptile with a long snout and sharp teeth."));
 
-        // _currentUser = _userManager.LogIn();
         _userManager = new UserManager();
+        //_currentUser = _userManager?.LogIn();
         _currentAnimal = GetRandomAnimal();
         _guess = Guess();
-        //_userAnswer = TryAgain();
     }
     
     // A simple method to show the whole list if needed
@@ -97,7 +95,6 @@ public class GameManager
         }
         else
         {
-            Console.WriteLine("How many legs do you think this animal has? ");
             // This might need another solution, like a throw-exception. 
             return -1;
         }
@@ -117,7 +114,8 @@ public class GameManager
 
     public bool TryAgain()
     {
-        Console.WriteLine("Try again? Please write: Yes or No");
+        Console.WriteLine("Try again? Please write: Yes or No.");
+        Console.WriteLine("Type Back, to go back to main menu");
         string? answer = Console.ReadLine()?.ToLower();
         
         if (answer == UserAnswer.Yes.ToString().ToLower())
@@ -127,13 +125,10 @@ public class GameManager
 
         if (answer == UserAnswer.No.ToString().ToLower())
         {
+            MainMenu();
             return false;
         }
 
-        if (answer == UserAnswer.Back.ToString().ToLower())
-        {
-            MainMenu();
-        }
 
         Console.WriteLine("Incorrect input");
         return false;
@@ -153,7 +148,8 @@ public class GameManager
                     StartGame();
                 break;
                 case "2":
-                    _userManager.LogIn();
+                    _currentUser = _userManager.LogIn();
+                    MainMenu();
                     break;
                 case "3":
                     Environment.Exit(0);
@@ -168,9 +164,17 @@ public class GameManager
     public void StartGame()
     {
         _gameActive = true;
-        
+
         while (_gameActive)
         {
+            if (_currentUser != null)
+            {
+            Console.WriteLine("Logged in as: " + _currentUser?.GetUserName());
+            Console.WriteLine("Points: " + _currentUser?.GetUserPoint());
+            }
+            
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("How many legs do you think this animal has?");
             Console.WriteLine(BlurAnimalName());
             Console.WriteLine(_currentAnimal.hint);
             
@@ -180,11 +184,11 @@ public class GameManager
             if (isCorrect)
             {
                 Console.WriteLine("Correct! The animal was: " + _currentAnimal.name);
+                _currentUser?.SetUserPoint(_currentUser.GetUserPoint() +1);
                 bool userAnswer = TryAgain();
                 if (userAnswer)
                 {
                     Console.WriteLine("Starting a new game..");
-
                     _currentAnimal = GetRandomAnimal();
                     _guess = Guess();
                 }
@@ -197,6 +201,7 @@ public class GameManager
             else
             {
                 Console.WriteLine("Wrong guess, please try again.");
+                _currentUser?.SetUserPoint(_currentUser.GetUserPoint() -1);
                 _gameActive = true;
             }
         }

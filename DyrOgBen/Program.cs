@@ -4,7 +4,6 @@ using DyrOgBen;
 
 // Program.cs
 GameManager gameManager = new GameManager();
-//UserManager userManager = new UserManager();
 
 gameManager.MainMenu();
 
@@ -17,9 +16,10 @@ gameManager.MainMenu();
 // Add point system () * on hold
 
 // Fix case 1 inside MainMenu(✓) * Should be fixed now;
-// Make Login() return _loggedIn or _notLoggedIn?
-// Make it possible to start game without logging in
-// Make us of the logout method
+// Make it possible to start game without logging in (✓)
+// Make use of the logout method (✓)
+// Fix wrong answer
+// Fix Back CW
 
 // Add a class that contains the programs theme/category, difficulty settings
 // Add classes that inherits from this one 

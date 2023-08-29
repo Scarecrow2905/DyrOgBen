@@ -16,7 +16,6 @@ public class UserManager
     private User? FindUser(string username, string password)
     {
         return _users.Find(user => user?.GetUserName() == username && user.GetUserPassword() == password);
-
     }
     
     public User? LogIn()
@@ -40,7 +39,6 @@ public class UserManager
         _loggedIn = false;
         Console.WriteLine("Didn't find a user that matched your criteria, please try again. ");
         return null;
-        
     }
 
     public void LogOut()
