@@ -134,39 +134,55 @@ public class GameManager
     
     public void MainMenu()
     {
-        Console.WriteLine("1. Start game");
+        bool exitMainMenu = false;
         
-        if (_currentUser != null)
+        while (!exitMainMenu)
         {
-            Console.WriteLine("2. Log out");
-        }
-        else
-        {
-            Console.WriteLine("2. Log in");
-        }
-        
-        Console.WriteLine("3. Exit");
-        
-        string? option = Console.ReadLine();
-        
+            Console.WriteLine("1. Start game");
+
+            if (_currentUser != null)
+            {
+                Console.WriteLine("2. Log out");
+            }
+            else
+            {
+                Console.WriteLine("2. Log in");
+            }
+
+            Console.WriteLine("3. Exit");
+
+            string? option = Console.ReadLine();
+
             switch (option)
-            { 
+            {
                 case "1":
                     StartGame();
-                break;
+                    break;
                 case "2":
-                    if (_currentUser != null) _currentUser = _userManager.LogOut();
-                    _currentUser = _userManager.LogIn();
-                    MainMenu();
+                    if (_currentUser != null)
+                    {
+                        _currentUser = _userManager.LogOut();
+                    }
+                    else
+                    {
+                        _currentUser = _userManager.LogIn();
+                    }
                     break;
                 case "3":
+                    exitMainMenu = true; // Set the flag to exit the loop
                     Environment.Exit(0);
-                break;
+                    break;
                 default:
-                    Console.WriteLine("Invalid option, please choose a number"); 
-                break;
+                    Console.WriteLine("Invalid option, please choose a number");
+                    break;
             }
-        
+            // Check if the user has logged out or chosen to exit
+            if (_currentUser == null && option == "3")
+            {
+                Console.WriteLine("Logged out and exits program..");
+                break; // Exit the loop
+            }
+        }
     }
     // Bigger method where i pack the game logic and use the other methods
     public void StartGame()

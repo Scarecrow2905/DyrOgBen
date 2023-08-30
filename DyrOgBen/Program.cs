@@ -19,7 +19,8 @@ gameManager.MainMenu();
 // Make use of the logout method (✓)
 // Fix wrong answer (✓)
 // Fix Back CW (✓)
-// Fix LogIn and LogOut (!!!)
+// Fix LogIn and LogOut (✓)
+// Fix going back and forth between menus/modes seamless (✓)
 
 // Add a class that contains the programs theme/category, difficulty settings
 // Add classes that inherits from this one 
